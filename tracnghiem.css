@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+body {
+  background-color: #f4f7f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+
+.quiz-container {
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 500px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+h2 {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+.option-btn {
+  background-color: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #622D0C;
+}
+
+
+.option-btn:hover {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+
+
+/* Các lớp CSS khi chọn đúng/sai */
+.option-btn.correct {
+  background-color: #d4edda !important;
+  border-color: #c3e6cb !important;
+  color: #155724;
+  font-weight: bold;
+}
+
+
+.option-btn.wrong {
+  background-color: #f8d7da !important;
+  border-color: #f5c6cb !important;
+  color: #721c24;
+}
+
+
+.result {
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+
+.next-btn {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+
+.next-btn:hover {
+  background-color: #0056b3;
+}

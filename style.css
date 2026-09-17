@@ -1,0 +1,307 @@
+
+/* CHEMISTRY 12 CHATBOT */
+/* ---------- GENERAL ---------- */
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #e0f2fe, #f0fdf4);
+    margin: 0;
+    padding: 40px 20px;
+    color: #1e293b;
+}
+
+
+/* ---------- CHATBOT CONTAINER ---------- */
+
+
+.chatbot {
+    width: 700px;
+    max-width: 100%;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.12),
+        0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+
+/* ---------- HEADER ---------- */
+
+
+h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #0f766e;
+}
+
+
+.subtitle {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #64748b;
+    font-size: 15px;
+}
+
+
+/* ---------- RANDOM BUTTON ---------- */
+
+
+.chatbot>button {
+    display: block;
+    margin: 0 auto 20px auto;
+    background: #0f766e;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 11px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+
+.chatbot>button:hover {
+    background: #115e59;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(15, 118, 110, 0.25);
+}
+
+
+/* ---------- SUGGESTED QUESTIONS ---------- */
+
+
+.suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+
+.suggestions button {
+    flex: 1;
+    min-width: 180px;
+    background: #f0fdfa;
+    color: #0f766e;
+    border: 1px solid #99f6e4;
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+
+.suggestions button:hover {
+    background: #ccfbf1;
+    border-color: #2dd4bf;
+    transform: translateY(-1px);
+}
+
+
+/* ---------- CHAT BOX ---------- */
+
+
+#chatBox {
+    height: 450px;
+    overflow-y: auto;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    padding: 18px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    scroll-behavior: smooth;
+}
+
+
+/* ---------- SCROLL BAR ---------- */
+#chatBox::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+#chatBox::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+
+#chatBox::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+
+#chatBox::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+
+/* ---------- BOT MESSAGE ---------- */
+
+
+.bot-message {
+    background: white;
+    border-left: 4px solid #10b981;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    border-radius: 4px 12px 12px 4px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+    line-height: 1.6;
+    max-width: 90%;
+}
+
+
+/* ---------- USER MESSAGE ---------- */
+
+
+.user-message {
+    background: #0f766e;
+    color: white;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    border-radius: 12px 12px 4px 12px;
+    text-align: right;
+    margin-left: auto;
+    max-width: 80%;
+    line-height: 1.5;
+    box-shadow: 0 2px 6px rgba(15, 118, 110, 0.2);
+}
+
+
+/* ---------- INPUT AREA ---------- */
+.input-area {
+    display: flex;
+    gap: 10px;
+    background: #f8fafc;
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+
+/* ---------- INPUT ---------- */
+input {
+    flex: 1;
+    padding: 13px 14px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    color: #1e293b;
+}
+
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+
+
+
+/* ---------- SEND BUTTON ---------- */
+.input-area button {
+    background: #0f766e;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+
+.input-area button:hover {
+    background: #115e59;
+    transform: translateY(-1px);
+}
+
+
+.input-area button:active {
+    transform: translateY(0);
+}
+
+
+
+
+/* ---------- LIST INSIDE BOT MESSAGE ---------- */
+
+
+.bot-message ul {
+    margin-top: 8px;
+    margin-bottom: 5px;
+    padding-left: 25px;
+}
+
+
+.bot-message li {
+    margin-bottom: 5px;
+}
+
+
+
+
+/* ---------- MOBILE ---------- */
+
+
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+
+    .chatbot {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+
+    h1 {
+        font-size: 25px;
+    }
+
+
+    #chatBox {
+        height: 400px;
+        padding: 12px;
+    }
+
+
+    .suggestions {
+        flex-direction: column;
+    }
+
+
+    .suggestions button {
+        width: 100%;
+    }
+
+
+    .input-area {
+        gap: 5px;
+    }
+
+
+    .input-area button {
+        padding: 12px 15px;
+    }
+
+
+    .user-message,
+    .bot-message {
+        max-width: 92%;
+    }
+}

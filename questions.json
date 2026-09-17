@@ -1,0 +1,88 @@
+[
+  {
+    "question": "Câu 1: Chất thuộc nhóm monosaccharide là:",
+    "options": ["A. saccharose", "B. glucose", "C. cellulose", "D. tinh bột"],
+    "answer": 1
+  },
+  {
+    "question": "Câu 2: Chất thuộc nhóm disaccharide là:",
+    "options": ["A. maltose", "B. fructose", "C. cellulose", "D.tinh bột"],
+    "answer": 1
+  },
+  {
+    "question": "Câu 3: Chất thuộc nhóm polysaccharide là:",
+    "options": ["A. glucose", "B. fructose", "C. cellulose", "D. maltose"],
+    "answer": 2
+  },
+  {
+    "question": "Câu 4: Chất thuộc hợp chất carbohydrate là:",
+    "options": ["A. tinh bột.", "B. methanol.", "C. amino acid", "D. acetic acid"],
+    "answer": 0
+  },
+  {
+    "question": "Câu 5: Chất nào không thuộc hợp chất carbohydrate:",
+    "options": ["A. Proteose", "B. maltose.", "C. cellulose", "D. glucose"],
+    "answer": 0
+  },
+  {
+    "question": "Câu 6: Chất nào sau đây không có khả năng tráng bạc:",
+    "options": ["A. glucose.", "B. fructose.", "C. maltose", "D. saccharose"],
+    "answer": 3
+  },
+  {
+    "question": "Câu 7: Ở bước 2, ta thấy sau khi cho glucose vào, dung dịch chuyển sang màu xanh lam đậm vì:",
+    "options": ["A. Glucose có 5 nhóm -OH liền kề.", "B. Tính chất của nhóm aldehyde.", "C. Glucose bị xà phòng hoá.", "D. Glucose phản ứng màu biuret."],
+    "answer": 0
+  },
+  {
+    "question": "Câu 8: Ở bước 3, chất kết tủa màu nâu đỏ là chất:",
+    "options": ["A. CuO", "B. Cu(OH)₂", "C. Cu₂O", "D. CuSO₄"],
+    "answer": 2
+  },
+  {
+    "question": "Câu 9: Chất nào sau đây giúp phân biệt glucose và saccharose?",
+    "options": ["A. Cu(OH)₂/NaOH", "B. Quỳ tím", "C. CuO", "D.Cu(OH)₂/NaOH (nhiệt độ cao)"],
+    "answer": 3
+  },
+   {
+    "question": "Câu 10: Có bao nhiêu nguyên tử H trong công thức của fructose?",
+    "options": ["A.11", "B.10", "C.9", "D.12"],
+    "answer": 3
+  },
+  {
+    "question": "Câu 11: Có bao nhiêu nguyên tử C trong công thức của maltose?",
+    "options": ["A.11", "B.22", "C.9", "D.12"],
+    "answer": 3
+  },
+  {
+    "question": "Câu 12: Ở bước 2, sau khi làm dung dịch được làm nóng trên lửa đèn cồn, trên thành ống nghiệm xuất hiện một lớp bạc vì:",
+    "options": ["A. Glucose có 5 nhóm -OH liền kề.", "B. Tính chất của nhóm aldehyde.", "C. Glucose bị xà phòng hoá.", "D. Glucose phản ứng màu biuret."],
+    "answer": 1
+  },
+  {
+    "question": "Câu 13: Trong những chất dưới đây, chất nào không thể xảy ra phản ứng tráng bạc giống video?",
+    "options": ["A. glucose", "B. cellulose", "C. maltose", "D. fructose"],
+    "answer": 1
+  },
+  {
+    "question": "Câu 14: Trong những chất sau: glucose, saccharose, amylose, maltose, cellulose có bao nhiêu chất có khả năng tham gia phản ứng tráng bạc?",
+    "options": ["A. 2", "B. 3", "C. 5", "D.1"],
+    "answer": 0
+  },
+  {
+    "question": "Câu 16: Từ 16,20 tấn cellulose, người ta sản xuất được m tấn cellulose trinitrate (biết hiệu suất phản ứng tính theo cellulose là 90%). Giá trị của m là:",
+    "options": ["A. 26,73", "B. 33,00", "C. 25,46", "D. 29,70"],
+    "answer": 0
+  },
+  {
+    "question": "Câu 17: Từ 1 kg mùn cưa có 40% cellulose (còn lại là tạp chất trơ) có thể thu được bao nhiêu kg glucose( hiệu suất phản ứng bằng 90%)?",
+    "options": ["A. 0,4kg", "B. 0,5kg", "C. 0,6kg", "D. 0,3kg"],
+    "answer": 0
+  },
+  {
+    "question": "Câu 18: Đun nóng dung dịch chứa 27g glucose với thuốc thử Tollens thì khối lượng Ag tối đa thu được là:",
+    "options": ["A. 16,2g", "B. 21,6g", "C. 10,8g", "D. 32,4g"],
+    "answer": 3
+  }
+]
+

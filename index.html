@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sách Lật Điện Tử</title>
+
+  <!-- Nhúng thư viện Page-Flip từ CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chemistry 12 Chatbot</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="tracnghiem.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 100%;
+      height: 100%;
+      background-color: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      overflow: auto;
+      padding: 10px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    /* Khung chứa cuốn sách */
+    .book-container {
+      width: 65%;
+      height: calc(100vh - 65px);
+      max-width: 100vw;
+      max-height: calc(100vh - 65px);
+      margin: 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+
+    /* Kiểu dáng chung cho mỗi trang */
+
+    .my-page {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+
+    }
+
+    .my-page.--menu {
+      padding: 0px;
+      /* background-color: chocolate; */
+      background-image: url('img/mucluc.jpg');
+      background-size: cover;
+    }
+
+    /* Trang bìa */
+    .my-page.--cover {
+      padding: 0;
+      background-color: #2c3e50;
+      color: #ffffff;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .my-page.--cover h1 {
+      font-size: clamp(20px, 2.5vw, 38px);
+      line-height: 1.3;
+      margin-bottom: 15px;
+      overflow-wrap: break-word;
+    }
+
+    .my-page.--cover h3 {
+      font-size: clamp(17px, 1.8vw, 28px);
+      line-height: 1.4;
+    }
+
+    .page-content {
+      width: 100%;
+      line-height: 1.6;
+      color: #333;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+
+    .page-content h2 {
+      font-size: 22px;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .page-content p {
+      margin-bottom: 10px;
+    }
+
+    .page-content img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: auto;
+    }
+
+    .page-footer {
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      border-top: 1px solid #eee;
+      padding-top: 10px;
+      margin-top: 15px;
+    }
+
+    /* Khung điều hướng (Nút Next / Prev) */
+    .controls {
+      width: 100%;
+      height: 55px;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      max-width: 100vw;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 14px;
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      touch-action: manipulation;
+    }
+
+
+    button:hover {
+      background-color: #34495e;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .page-indicator {
+      font-size: 14px;
+      font-weight: bold;
+      color: #555;
+      white-space: nowrap;
+    }
+
+    .stPageFlipBoundary {
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+
+
+
+
+    /* Tối ưu render cho khung chứa sách và từng trang */
+    #my-book,
+    .my-page {
+
+      /* Ép trình duyệt dùng GPU rendering */
+      will-change: transform;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+
+      /* Giúp chữ và hình ảnh không bị nhòe/giật khi xoay 3D */
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Tắt chọn văn bản khi đang lật để tránh lag */
+    .stPageFlipBoundary {
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+
+    /* MOBILE <= 600px */
+    @media (max-width: 600px) {
+      body {
+        padding: 5px;
+      }
+
+      .book-container {
+        width: 65%;
+        height: calc(100vh - 60px);
+        max-height: calc(100vh - 60px);
+        margin: 0;
+      }
+
+      .my-page {
+        padding: 20px;
+      }
+
+
+      .page-content h2 {
+        font-size: 19px;
+      }
+
+
+      .page-content {
+        font-size: 14px;
+
+
+        line-height: 1.5;
+      }
+
+
+      .page-footer {
+        font-size: 11px;
+
+
+        padding-top: 7px;
+      }
+
+
+      .controls {
+        height: 50px;
+
+
+        gap: 8px;
+      }
+
+
+      button {
+        padding: 9px 12px;
+
+
+        font-size: 13px;
+      }
+
+
+      .page-indicator {
+        font-size: 12px;
+      }
+    }
+
+
+    /*
+   ĐIỆN THOẠI RẤT NHỎ <= 380px
+ */
+
+
+    @media (max-width: 380px) {
+      .book-container {
+        width: 65%;
+        height: calc(100vh - 55px);
+        max-height: calc(100vh - 55px);
+      }
+
+
+      .my-page {
+        padding: 15px;
+      }
+
+
+      .page-content {
+        font-size: 13px;
+
+
+        line-height: 1.45;
+      }
+
+
+      .page-content h2 {
+        font-size: 17px;
+      }
+
+
+      .page-footer {
+        font-size: 10px;
+      }
+
+
+      button {
+        padding: 8px 10px;
+
+
+        font-size: 12px;
+      }
+
+
+      .page-indicator {
+        font-size: 11px;
+      }
+    }
+
+
+    /* TABLET 601px - 1000px
+ */
+
+
+    @media (min-width: 601px) and (max-width: 1000px) {
+      .book-container {
+        width: 65%;
+        height: calc(100vh - 65px);
+        max-height: calc(100vh - 65px);
+      }
+
+
+      .my-page {
+        padding: 25px;
+      }
+    }
+
+
+    /* MÀN HÌNH LỚN / TV > 1000px */
+    @media (min-width: 1001px) {
+      .book-container {
+        width: 65%;
+        height: calc(100vh - 65px);
+        max-width: 100vw;
+        max-height: calc(100vh - 65px);
+      }
+
+      .my-page {
+        padding: 35px;
+      }
+
+
+      .page-content {
+        font-size: 16px;
+
+
+        line-height: 1.7;
+      }
+
+
+      .page-content h2 {
+        font-size: 26px;
+      }
+
+
+      .page-footer {
+        font-size: 13px;
+      }
+    }
+
+
+    /* TV RẤT LỚN  >= 1600px */
+
+
+    @media (min-width: 1600px) {
+      .my-page {
+        padding: 45px;
+      }
+
+
+      .page-content {
+        font-size: 18px;
+
+
+        line-height: 1.75;
+      }
+
+
+      .page-content h2 {
+        font-size: 30px;
+      }
+
+
+
+
+      .page-footer {
+        font-size: 14px;
+      }
+
+
+      button {
+        padding: 12px 24px;
+
+
+        font-size: 16px;
+      }
+
+
+      .page-indicator {
+        font-size: 16px;
+      }
+    }
+
+
+    /* MÀN HÌNH NGANG */
+
+
+    @media (orientation: landscape) {
+      .book-container {
+        height: calc(100vh - 55px);
+
+
+        max-height: calc(100vh - 55px);
+      }
+    }
+
+
+    /* MÀN HÌNH DỌC */
+
+
+    @media (orientation: portrait) and (max-width: 600px) {
+      .book-container {
+        width: 65%;
+      }
+    }
+
+    img.bai {
+      width: 100%;
+      height: 100%;
+      transform: translateY(-10%);
+      margin: 0px;
+      padding: 0px;
+    }
+
+    img.hinh {
+      width: 100%;
+      height: 100%;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    b.blone {
+      color: #622D0C;
+      text-decoration-color: #622D0C;
+      text-decoration: underline;
+    }
+
+    h2.menu {
+      font-size: clamp(5px, 2.5vw, 18px);
+      padding: 10%;
+      color: #622D0C;
+      line-height: 1.3;
+      margin-bottom: 15px;
+      overflow-wrap: break-word;
+      transform: translateY(40%) translatex(10%);
+    }
+
+    p.tieude {
+      font-family: saira Stencil;
+      font-size: clamp(15px, 2.5vw, 18px);
+      color: #622D0C;
+      margin: 0%;
+      padding: 0%;
+      font-weight: bold;
+    }
+
+    .thuong {
+      font-size: clamp(8px, 2.5vw, 12px);
+      color: #622D0C;
+    }
+
+    t.tieude {
+      font-family: saira Stencil;
+      font-size: clamp(15px, 2.5vw, 18px);
+      color: #622D0C;
+      margin: 0%;
+      padding: 0%;
+      font-weight: bold;
+    }
+
+    p {
+      font-family: montserrat;
+      font-size: clamp(8px, 2.5vw, 12px);
+      color: #622D0C;
+      margin: 0px;
+      padding: 0px;
+    }
+
+     @font-face {
+        font-family: "Saira Stencil";
+        src: url("font/SairaStencil-VariableFont_wdth\,wght.ttf");
+        font-style: normal;
+        font-display: swap; /* Giúp hiện chữ ngay khi chờ nạp font */
+      }
+
+      @font-face {
+        font-family: "Montserrat";
+        src: url("font/Montserrat-VariableFont_wght.ttf");
+        font-style: normal;
+        font-display: swap; /* Giúp hiện chữ ngay khi chờ nạp font */
+      }
+
+  </style>
+</head>
+
+<body>
+  <!-- KHU VỰC SÁCH LẬT -->
+  <div class="book-container">
+    <div id="my-book">
+      <!-- Trang 1: Bìa sách -->
+      <div class="my-page --cover" data-density="hard">
+        <img width="100%" height="100%" src="img/bia.jpg">
+      </div>
+      <!-- Trang 2 -->
+      <div class="my-page --cover">
+        <div>
+          <img width="100%" height="100%" src="img/hdsd.jpg">
+        </div>
+      </div>
+      <!-- Trang 3 -->
+      <div class="my-page --cover">
+        <div>
+          <img width="100%" height="100%" src="img/lnd.jpg">
+        </div>
+      </div>
+      <!-- Trang 4 -->
+      <div class="my-page --menu">
+        <div class="page-content">
+          <h2 class="menu">
+            <a href="#" class="toc-link" data-page="5">
+              <b class="blone">Bài 1: Giới thiệu về Carbohydrate</b></a>
+            <br />
+            </br>
+            <a href="#" class="toc-link" data-page="7">
+              <b class="blone">Bài 2: </b></a> Glucose Và Fructose
+            </br>
+            </br>
+            <a href="#" class="toc-link" data-page="13">
+              <b class="blone">Bài 3: </b></a> Saccharose Và Maltose
+            </br>
+            </br>
+            <a href="#" class="toc-link" data-page="18">
+              <b class="blone">Bài 4: </b></a> Tinh Bột Và Cellulose
+            </br>
+            </br>
+            <a href="#" class="toc-link" data-page="23">
+              <b class="blone">Bài 5: </b></a> Tổng Hợp Kiến Thức
+            </br>
+            </br>
+            <a href="#" class="toc-link" data-page="25">
+              <b class="blone">Bài 6: </b></a> Bài Tập Thực Hành
+          </h2>
+        </div>
+      </div>
+
+
+
+
+      <!-- Trang 5 -->
+      <div class="my-page">
+        <div class="page-content">
+          <img class="bai" src="img/bai1.jpg">
+          <p class="tieude">I. KHÁI NIỆM</p>
+          <p>- Carbohydrate là những hợp chất hữu cơ tạp chức, thường có công thức chung là
+            C<sub>n</sub>(H<sub>2</sub>O)<sub>m</sub></p>
+          <img src="img/1.jpg">
+        </div>
+
+        <!-- Trang 6-->
+        <div class="my-page">
+          <div class="page-content">
+            <p class="tieude">II. PHÂN LOẠI</p>
+            <p class="tieude">-Chia thành ba loại chính:</p>
+            <img class="hinh" src="img/2.jpg">
+          </div>
+        </div>
+        <!-- Trang 7 -->
+        <div class="my-page">
+          <div class="page-content">
+            <img class="bai" src="img/bai2.jpg">
+            <p>
+              <t class="tieude">I KHÁI NIỆM</t></br>
+              <t class="tieude">1.GLUCOSE</t></br>
+              -Glucose có công thức phân tử C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> M=180</br>
+              <img class="hinh" src="img/3.jpg">
+              -Glucose có 5 nhóm -OH></br>
+              -Ở dạng mạch hở, glucose có 1 gốc aldehyde.</br>
+              -Glucose tồn tại ở dạng mạch hở là chủ yếu.</br>
+              <t class="tieude">2.FRUCTOSE</t></br>
+              Fructose có công thức phân tử C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> M=180, là
+              đồng phân của glucose.
+            </p>
+            <img class="bai" src="img/4.jpg">
+          </div>
+        </div>
+        <!-- Trang 8 -->
+        <div class="my-page">
+          <div class="page-content">
+            <t class="thuong">-Fructose có 5 nhóm -OH></br>
+              -Ở dạng mạch hở, glucose có 1 gốc ketone.</br>
+              -Fructose tồn tại ở dạng mạch hở là chủ yếu.</br>
+              <img class="hinh" src="img/8.jpg">
+              <table>
+                <tr>
+                  <td>
+                    <t class="thuong">
+                      Ví dụ: sự hình thành cấu tạo vòng của glucose là do nhóm –OH trên carbon số 5 với nhóm –CH=O (như
+                      hình bên):
+                    </t>
+                  </td>
+                  <td>
+                    <img style="height: 80%; width: 80%;" src="img/5.jpg">
+                  </td>
+                </tr>
+              </table>
+              <t class="tieude">II. TÍNH CHẤT VẬT LÝ:</br></t>
+              <img class="hinh" src="img/6.jpg">
+            </t>
+          </div>
+        </div>
+        <!-- Trang 9 -->
+        <div class="my-page">
+          <div class="page-content">
+            <img class="hinh" src="img/7.jpg">
+            <p>
+              <t class="tieude">III. TÍNH CHẤT HÓA HỌC</t></br>
+              -Glucose có tính chất của polyalcohol và của aldehyde.</br>
+              -Fructose có tính chất của polyalcohol và của ketone.</br>
+              <t class="tieude"> Chất Hóa Học Của Polyalcohol:</t></br>
+              -Glucose và fructose có nhiều nhóm hydroxy(-OH) liền</br>
+              kề ⟶ hòa tan được copper(II)hydroxide(Cu(OH)<sub>2</sub> ) trong
+              môi trường kiềm ở nhiệt độ thường ⟶ dung dịch phức màu xanh lam.</br>
+              2C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + Cu(OH)<sub>2</sub>--<sup>NaOH</sup>->
+              (C<sub>6</sub>H<sub>11</sub>O<sub>6</sub>)<sub>2</sub>Cu + 2H<sub>2</sub>O
+              <img class="hinh" src="img/9.jpg">
+            </p>
+          </div>
+        </div>
+        <!-- Trang 10-->
+        <div class="my-page">
+          <div class="page-content">
+            <p>
+              <t class="tieude">2.Chất Của Aldehyde:</t></br>
+              -Glucose phản ứng với Cu(OH)<sub>2</sub> trong môi trường kiềm ở <b> NHIỆT ĐỘ CAO </b> tạo kết tủa đỏ
+              gạch.</br> CH<sub>2</sub>OH[CHOH]<sub>4</sub>CH=O + 2Cu(OH)<sub>2</sub> +
+              NaOH———></br>CH<sub>2</sub>OH[CHOH]<sub>4</sub>COONa + Cu<sub>2</sub>O&darr; + 3H<sub>2</sub>O</br>
+              <img class="hinh" src="img/10.jpg">
+              -Phản ứng với thuốc thử Tollens:</br>
+              CH<sub>2</sub>OH[CHOH]<sub>4</sub>CH=O + 2[Ag(NH<sub>3</sub>)<sub>2</sub>]OH
+              ———></br>CH<sub>2</sub>OH[CHOH]<sub>4</sub>COONH<sub>4</sub> + 2Ag&darr; + 3NH<sub>3</sub> +
+              H<sub>2</sub>O
+              </br>
+              <img class="hinh" src="img/11.jpg">
+              -Phản ứng với thuốc thử Tollens:</br>
+              CH<sub>2</sub>OH[CHOH]<sub>4</sub>CH=O + Br<sub>2</sub> + H<sub>2</sub>O &rarr;
+              CH<sub>2</sub>OH[CHOH]<sub>4</sub>COOH + 2HBr</br>
+          </div>
+        </div>
+        <!-- Trang 11-->
+        <div class="my-page">
+          <div class="page-content">
+            <p>-Tương tự glucose, fructose cũng bị oxi hoá bởi thuốc thử Tollens và Cu(OH)<sub>2</sub> trong môi
+              trường kiềm.</br>
+              -Nhưng fructose KHÔNG tác dụng với dung dịch Br<sub>2</sub> ⟶ cách phân biệt glucose với fructose.</br>
+              <t class="tieude"> 3.Tính Chất Riêng Của Hemiacetal:</t></br>
+              Ở dạng cấu tạo mạch vòng, nhóm –OH hemiacetal của glucose tác dụng với methanol khi có mặt của HCl
+              khan, tạo thành methyl α-glucoside</br>
+              <t class="tieude">4.Phản Ứng Lên Men Của Glucose:</t></br>
+              Dưới tác dụng của enzyme từ các vi sinh vật khác nhau,
+              glucose được lên men tạo thành các hợp chất có nhiều
+              ứng dụng trong đời sống như ethanol, lactic acid…</br>
+              C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> ——<sup>enzyme</sup>——> 2C<sub>2</sub>H<sub>5</sub>OH +
+              2CO<sub>2</sub>&uarr;</br>
+              C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>——<sup>enzyme</sup>———>2CH<sub>3</sub>CH(OH)COOH</br>
+              <img class="hinh" src="img/12.jpg">
+          </div>
+        </div>
+        <!-- Trang 12 -->
+        <div class="my-page">
+          <div class="page-content">
+            <t class="tieude">IV.ỨNG DỤNG:</br></t>
+            <img class="hinh" src="img/34.jpg">
+          </div>
+        </div>
+        <!-- Trang 13 -->
+        <div class="my-page">
+          <div class="page-content">
+            <img class="bai" src="img/bai3.jpg">
+            <t class="tieude">I. KHÁI NIỆM:</t></br>
+            <p>
+              <t class="tieude"> 1.Saccharose:</t></br>
+              Saccharose có công thức phân tử: H<sub>12</sub>C<sub>22</sub>O<sub>11</sub>, M = 342</br>
+              <img class="hinh" src="img/14.jpg">
+              -Saccharose chỉ có dạng mạch vòng</br>
+              -Được cấu tạo từ 1 gốc α-glucose và 1 gốc β-fructose liên
+              kết với nhau qua nguyên tử oxygen bằng liên kết α-1,2-
+              glycoside</br>
+              <t class="tieude"> 2.Maltose:</t><br>
+              Maltose có công thức phân tử: H<sub>12</sub>C<sub>22</sub>O<sub>11</sub>, M = 342
+            </p>
+            <img class="hinh" src="img/15.jpg">
+          </div>
+        </div>
+        <!-- Trang 14 -->
+        <div class="my-page">
+          <div class="page-content">
+            <p>-Maltose là đồng phân của saccharose.</br>
+              -Tồn tại cả dạng mạch hở và mạch vòng(dạng mạch vòng là chủ yếu).</br>
+              -Được cấu tạo từ hai đơn vị glucose (α-glucose hoặc β-glucose)</br>
+              <t class="tieude">II.TÍNH CHẤT VẬT LÝ:</t>
+            </p>
+            <img class="hinh" src="img/16.jpg">
+          </div>
+        </div>
+        <!-- Trang 15 -->
+        <div class="my-page">
+          <div class="page-content">
+
+            <p>
+              <img style="height: 100%;width: 100%;" src="img/17.jpg">
+              <t class="tieude"> III. Tính chất hóa học</t></br>
+              <t class="tieude"> 1.Tính chất của polyalcohol</t></br>
+              -Saccharose và maltose có nhiều nhóm hydroxy(-OH)
+              liền kề ⟶ hòa tan được copper(II)hydroxide(Cu(OH)<sub>2</sub>) trong môi trường kiềm ở nhiệt độ thường
+              <ruby>⟶<rt>NaOH</rt></ruby>
+              dung dịch
+              phức màu xanh lam.</br>
+              2C<sub>12</sub>H<sub>22</sub>O<sub>11</sub> + Cu(OH)<sub>2</sub>--->
+              (C<sub>12</sub>H<sub>22</sub>O<sub>11</sub>)<sub>2</sub>Cu + 2H<sub>2</sub>O
+              <img style="height: 70%;width: 70%;" class="hinh" src="img/18.jpg">
+              </br>
+              <t class="tieude"> 2.phản ứng thủy phân trong môi trường acid:</t></br>
+              -Saccharose và maltose bị thuỷ phân khi đun nóng
+              trong môi trường acid.<br>
+              -Saccharose cho ra 2 sản phẩm là glucose và fructose.</br>
+              -Maltose cho ra 1 sản phẩm là glucose.
+            </p>
+          </div>
+        </div>
+        <!-- trang 16 -->
+        <div class="my-page">
+          <div class="page-content">
+            <p>C<sub>12</sub>H<sub>22</sub>O<sub>11</sub> + H<sub>2</sub>O --<sup>[H<sup>+</sup>,
+                t<sup>o</sup>]</sup>---> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> +
+              C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></br>
+              C<sub>12</sub>H<sub>22</sub>O<sub>11</sub> + H<sub>2</sub>O --<sup>[H<sup>+</sup>,
+                t<sup>o</sup>]</sup>---> 2C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></br>
+              <t class="tieude"> 3.TÍNH CHẤT CỦA ALDEHYDE:</t></br>
+              -Maltose phản ứng với Cu(OH)<sub>2</sub> trong môi trường kiềm
+              ở NHIỆT ĐỘ CAO tạo kết tủa đỏ gạch.<br>
+              C<sub>12</sub>H<sub>22</sub>O<sub>11</sub> + 2Cu(OH)<sub>2</sub> + NaOH ---->
+              C<sub>12</sub>H<sub>21</sub>O<sub>11</sub>Na + Cu<sub>2</sub>O&darr; + 3H<sub>2</sub>O</br>
+              <img class="hinh" src="img/19.jpg">
+              -Phản ứng với thuốc thử Tollens:</br>
+              C<sub>12</sub>H<sub>22</sub>O<sub>11</sub> + 2[Ag(NH<sub>3</sub>)<sub>2</sub>]OH ---->
+              C<sub>12</sub>H<sub>21</sub>O<sub>11</sub>NH<sub>4</sub> + 2Ag&darr; + 3NH<sub>3</sub> + H<sub>2</sub>O
+              <img class="hinh" src="img/20.jpg">
+            </p>
+          </div>
+        </div>
+        <!-- Trang 17 -->
+        <div class="my-page">
+          <div class="page-content">
+            <p>-Phản ứng với dung dịch Br<sub>2</sub>:</br>
+              CH<sub>2</sub>OH[CHOH]<sub>4</sub>CH=O + Br<sub>2</sub> +
+              H<sub>2</sub>O--->CH<sub>2</sub>OH[CHOH]<sub>4</sub>COOH + 2HBr</br>
+              </br>
+              <t class="tieude"> IV.ỨNG DỤNG:</t>
+              <img class="hinh" src="img/21.jpg">
+            </p>
+          </div>
+        </div>
+        <!-- trang 18 -->
+        <div class="my-page">
+          <div class="page-content">
+            <p>
+              <img class="hinh" src="img/bai4.jpg">
+              <t class="tieude">I. KHÁI NIỆM:</t></br>
+              <t class="tieude">1.Tinh Bột:</t></br>
+              -Tinh bột có công thức phân tử là (C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>)<sub>n</sub>(M=162n)</br>
+              -Tinh bột là hỗn hợp gồm hai loại polysaccharide: amylose
+              (chiếm 20-30%) và amylopectin (chiếm 70-80%).</br>
+              -Tinh bột là hỗn hợp gồm hai loại polysaccharide: amylose
+              (chiếm 20-30%) và amylopectin (chiếm 70-80%).</br>
+              -Amylose:</br>
+              +Gồm nhiều đơn vị α-glucose liên kết với nhau qua liên
+              kết α-1,4-glycoside.</br>
+              +Polymer dài, không phân nhánh.</br>
+              +Do góc liên kết, chuỗi amylose tự động xoắn lại thành
+              hình xoắn ốc.
+              <img style="width: 70%;height: 70%;" src="img/23.jpg">
+            </p>
+          </div>
+        </div>
+        <!-- Trang 19 -->
+        <div class="my-page">
+          <div class="page-content">
+            <p>-Amylopectin:</br>
+              +Gồm các đoạn mạch ngắn chứa nhiều đơn vị α-glucose
+              liên kết α-1,4-glycoside. Các đoạn mạch này liên kết với
+              nhau tại điểm nhánh qua liên kết α-1,6-glycoside.</br>
+              +Cấu trúc phức tạp, cồng kềnh.</br>
+              <img class="hinh" src="img/24.jpg">
+              <t class="tieude">2.Cellulose:</t><br>
+              -Cellulose có công thức phân tử là (C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>)<sub>n</sub> (M rất lớn).
+              </br>
+              -Cellulose được cấu tạo từ nhiều đơn vị β-glucose liên kết
+              với nhau qua liên kết β-1,4-glycoside.</br>
+              -Mạch polymer của cellulose duỗi thẳng, không phân
+              nhánh và không xoắn.
+            </p>
+          </div>
+        </div>
+        <!-- trang 20 -->
+        <div class="my-page">
+          <div class="page-content">
+            <img class="hinh" src="img/25.jpg">
+            <img class="hinh" src="img/26.jpg">
+            <p>
+              <t class="tieude"> II.TÍNH CHẤT VẬT LÝ:</t><br>
+              6nCO<sub>2</sub> + 5nH<sub>2</sub>O
+              <ruby>→<rt>ánh sáng diệp lục</rt></ruby> (C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>)<sub>n</sub> +
+              6nO<sub>2</sub>
+              <img style="width: 100%;" src="img/27.jpg">
+            </p>
+          </div>
+        </div>
+        <!--trang 21  -->
+        <div class="my-page">
+          <div class="page-content">
+            <p>
+              <img style="width: 100%;" src="img/30.jpg">
+              <t class="tieude">III.TÍNH CHẤT HÓA HỌC:</t></br>
+              <t class="tieude">1.Tính Chất Hóa Học Của Tinh Bột:</t></br>
+              -Tinh bột bị thủy phân hoàn toàn trong môi trường
+              acid/enzyme tạo thành glucose.</br>
+              (C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>) + n(H<sub>2</sub>O)--<sup>enzyme/acid</sup>-->
+              nC<sub>6</sub>H<sub>12</sub>O<sub>6</sub></br>
+              -Thủy phân trong cơ thể người theo nhiều giai đoạn:</br>
+              Tinh bột--<sup>α-amylaza, H<sub>2</sub>O</sup>-->Dextrin--<sup>β-amylaza, H<sub>2</sub>O</sup></br>
+              -->Maltose--<sup>mantaza, H<sub>2</sub>O</sup></sup>-->Glucose---->Glycogen</br>
+              -Phản ứng màu với dung dịch iodine tạo thành dung
+              dịch màu xanh tím.</br>
+              <img style="width: 100%;" src="img/29.jpg">
+              <t class="tieude">2.Tính Chất Hóa Học Của Cellulose:</t><br>
+              -Tinh bột bị thủy phân hoàn toàn trong môi trường
+              acid/enzyme tạo thành glucose.</br>
+              (C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>) + n(H<sub>2</sub>O)--<sup>enzyme/acid</sup>-->
+              nC<sub>6</sub>H<sub>12</sub>O<sub>6</sub></br>
+          </div>
+        </div>
+        <!-- Trang 22 -->
+        <div class="my-page">
+          <div class="page-content">
+            <p>-Cellulose phản ứng với nitric acid tùy theo tỉ lệ sẽ tạo
+              thành cellulose dinitrate hoặc cellulose trinitrate.</br>
+              [C<sub>6</sub>H<sub>7</sub>O<sub>2</sub>(OH)<sub>3</sub>]<sub>n</sub>
+              + 2nHNO<sub>3</sub> (đặc)
+              <sup>H<sub>2</sub>SO<sub>4</sub></sup>--<sup>H<sub>2</sub>SO<sub>4</sub></sup>-->
+              [C<sub>6</sub>H<sub>7</sub>O<sub>2</sub>(OH)(ONO<sub>2</sub>)<sub>2</sub>]<sub>n</sub>
+              + 2nH<sub>2</sub>O
+              </br>
+              [C<sub>6</sub>H<sub>7</sub>O<sub>2</sub>(OH)<sub>3</sub>]<sub>n</sub>
+              + 3nHNO<sub>3</sub> (đặc)
+              <sup>H<sub>2</sub>SO<sub>4</sub></sup>--<sup>H<sub>2</sub>SO<sub>4</sub></sup>-->
+              [C<sub>6</sub>H<sub>7</sub>O<sub>2</sub>(ONO<sub>2</sub>)<sub>3</sub>]<sub>n</sub>
+              + 3nH<sub>2</sub>O
+              </br>
+              +Cellulose trinitrate dễ cháy nên dùng làm thuốc súng không khói.</br>
+              -Cellulose tan trong nước Schweizer (dung dịch khi hòa
+              tan Cu(OH)2trong NH3).</br>
+              <t class="tieude">IV.ỨNG DỤNG:</t></br>
+              <img style="width: 90%;" src="img/31.jpg">
+          </div>
+        </div>
+
+        <!-- trang 23 -->
+        <div class="my-page">
+          <div class="page-content">
+            <img class="hinh" src="img/bai5.jpg">
+            <img class="hinh" src="img/32.jpg">
+          </div>
+        </div>
+
+        <!-- trang 24 -->
+        <div class="my-page">
+          <div class="page-content">
+            <img class="hinh" src="img/33.jpg">
+          </div>
+        </div>
+
+        <div class="my-page">
+          <div class="page-content">
+            <p>Xem video và trả lời các câu hỏi từ 7-9:</p>
+            <iframe width="100%" height="50%" src="https://www.youtube.com/embed/QY_0IY9BTQ4?si=R7vRYZWFhOj3aG6j"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><br>
+            <p>Xem video và trả lời các câu hỏi 12-15:</p>
+            <iframe width="100%" height="50%" src="https://www.youtube.com/embed/nR2pU2ZmbrE?si=x14IS3klymU8e7gb"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+        <!-- phần câu hỏi -->
+        <div class="my-page">
+          <div class="page-content">
+            <div class="quiz-container">
+              <h2 id="question">Đang tải câu hỏi...</h2>
+              <div id="options" class="options-container">
+                <!-- Các nút lựa chọn sẽ được JavaScript sinh ra ở đây -->
+              </div>
+              <div id="result" class="result"></div>
+              <button id="next-btn" class="next-btn" style="display: none">
+                Câu tiếp theo ➔
+              </button>
+            </div>
+          </div>
+        </div>
+        <script src="tracnghiem.js"></script>
+
+        <!-- Trang 5: Bìa sau -->
+        <div class="my-page --cover" data-density="hard">
+          <h3>CẢM ƠN BẠN ĐÃ ĐỌC</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- NÚT ĐIỀU HƯỚNG NEXT / PREV -->
+    <div class="controls">
+      <button id="btn-prev">‹ Trang trước</button>
+      <span class="page-indicator" id="page-indicator">Trang 1 / 5</span>
+      <button id="btn-next">Trang sau ›</button>
+    </div>
+
+    <!-- CẤU HÌNH JAVASCRIPT -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const bookElement = document.getElementById("my-book");
+
+
+        const pageFlip = new St.PageFlip(bookElement, {
+          width: 2480,
+          height: 3508,
+          size: "stretch",
+          minWidth: 250,
+          minHeight: 375,
+          maxWidth: 1200,
+          maxHeight: 1800,
+          usePortrait: true,
+          flippingTime: 500,
+          startZIndex: 1,
+          drawShadow: true,
+          maxShadowOpacity: 0.15,
+          showCover: true,
+          useMouseEvents: true,
+        });
+
+
+        // Load pages
+        pageFlip.loadFromHTML(document.querySelectorAll(".my-page"));
+
+
+        const tocLinks = document.querySelectorAll(".toc-link");
+        tocLinks.forEach(function (link) {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const pageIndex = parseInt(this.dataset.page);
+            pageFlip.flip(pageIndex);
+          });
+        });
+
+
+
+        // Buttons
+        const btnPrev = document.getElementById("btn-prev");
+        const btnNext = document.getElementById("btn-next");
+        const pageIndicator = document.getElementById("page-indicator");
+        // Previous
+        btnPrev.addEventListener("click", function () {
+          pageFlip.flipPrev();
+        });
+
+
+        // Next
+        btnNext.addEventListener("click", function () {
+          pageFlip.flipNext();
+        });
+
+
+        // Page number
+        pageFlip.on("flip", function (e) {
+          const currentPage = e.data + 1;
+          const totalPages = pageFlip.getPageCount();
+
+
+          pageIndicator.textContent = `Trang ${currentPage} / ${totalPages}`;
+        });
+
+
+        // Responsive
+        let resizeTimer;
+
+
+        window.addEventListener("resize", function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function () {
+            pageFlip.update();
+          }, 250);
+        });
+
+
+        // Mobile orientation
+        window.addEventListener("orientationchange", function () {
+          setTimeout(function () {
+            pageFlip.update();
+          }, 500);
+        });
+      });
+
+    </script>
+<div class="chatbot">
+      <h1>Chatbot Hóa 12</h1>
+      <p class="subtitle"> Những câu hỏi mở rộng về hóa 12 </p>
+      <button onclick="randomQuestion()">🎲 Random Question</button>
+      <div class="suggestions">
+        <button onclick="askQuestion('Carbohydrate là gì?')">
+          Carbohydrate là gì?
+        </button>
+
+
+        <button onclick="askQuestion('Khái niệm đường khử là gì ?')">
+          Khái niệm đường khử là gì ?
+        </button>
+
+
+        <button onclick="askQuestion('So sánh Saccharose và Maltose')">
+          So sánh Saccharose và Maltose
+        </button>
+
+
+      </div>
+      <div id="chatBox">
+        <div class="bot-message">
+          Xin chào tôi là chatbot hóa của bạn.
+          <br><br>
+          Bạn có thể hỏi:
+          <ul>
+            <li>Carbohydrate</li>
+            <li>Glucose</li>
+            <li>Tinh bột và cellulose</li>
+            <li>Glucose và fructose</li>
+            <li>Saccharose và maltose</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="input-area">
+        <input type="text" id="userInput" placeholder="nhập câu hỏi hoặc từ khóa">
+        <button onclick="sendMessage()">
+          gửi
+        </button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
