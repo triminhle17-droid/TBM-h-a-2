@@ -1,0 +1,120 @@
+[
+    {
+        "id": 1,
+        "chapter": "Carbohydrate",
+        "topic": "Carbohydrate",
+        "question": " Carbohydrate là gì?",
+        "keywords": [
+            "Carbohydrate",
+            "Carb"
+        ],
+        "answer": "Carbohydrate là nhóm hợp chất hữu cơ chủ yếu gồm carbon, hydrogen và oxygen, có vai trò quan trọng trong cơ thể sống. Đây là một trong những nguồn cung cấp năng lượng chủ yếu cho cơ thể, đồng thời tham gia cấu tạo tế bào và dự trữ năng lượng. Carbohydrate có nhiều trong các loại thực phẩm như cơm, bánh mì, khoai, ngũ cốc, trái cây và đường. Dựa vào cấu tạo, carbohydrate được chia thành đường đơn, đường đôi và đường đa. Glucose, fructose, saccharose, maltose, tinh bột và cellulose đều là những carbohydrate quen thuộc trong tự nhiên và đời sống."
+    },
+    {
+        "id": 2,
+        "chapter": "Carbohydrate",
+        "topic": "Carbohydrate",
+        "question": " Carbohydrate gồm những loại nào?",
+        "keywords": [
+            "Phân loại carbohydrate"
+        ],
+        "answer": "Carbohydrate được chia thành ba nhóm chính: monosaccharide (đường đơn), disaccharide (đường đôi) và polysaccharide (đường đa). Monosaccharide là đường đơn như glucose (thường ở trong nho) và fructose (có nhiều trong mật ong hoặc trái cây có vị ngọt đậm như xoài, …). Disaccharide gồm các loại đường đôi như saccharose (có nhiều trong cây mía) và maltose (có ở trong ngũ cốc nảy mầm, mạch nha, …). Polysaccharide là những phân tử lớn như tinh bột (chứa trong hạt gạo, lúa mì, lúa mạch, …) và cellulose (có nhiều trong bông ), đay, gai, cói, …)."
+    },
+    {
+        "id": 3,
+        "chapter": "Carbohydrate",
+        "topic": "Saccharose",
+        "question": "Tại sao saccharose không phải là đường khử ?",
+        "keywords": [
+            "Saccharose không phải đường khử"
+        ],
+        "answer": "Saccharose không phải là đường khử vì cấu tạo của nó không còn vị trí có thể mở vòng để tạo ra dạng mạch hở có tính khử. Saccharose được tạo thành từ glucose và fructose, vị trí đặc biệt của cả glucose và fructose đều được sử dụng để tạo liên kết-> cả hai đầu có khả năng tham gia vào quá trình mở vòng đều bị “khóa” lại. Do không còn vị trí tự do để chuyển sang dạng mạch hở nên saccharose không có khả năng khử các chất oxi hóa( không tham gia phản ứng tráng bạc và thuốc thử Fehling)->saccharose được xếp vào nhóm đường không khử"
+    },
+    {
+        "id": 4,
+        "chapter": "Carbohydrate",
+        "topic": "Carbohydrate",
+        "question": "Khái niệm đường khử là gì ?",
+        "keywords": [
+            "Đường khử"
+        ],
+        "answer": "Đường khử là những carbohydrate có khả năng thực hiện phản ứng khử với một số chất oxi hóa, chẳng hạn như thuốc thử Fehling hoặc thuốc thử Tollens. Về bản chất, các loại đường này có một nhóm chức hoặc một vị trí cấu tạo có thể chuyển thành nhóm aldehyde khi phân tử chuyển sang dạng mạch hở. Nhờ đó, chúng có thể khử ion đồng hoặc ion bạc trong các phản ứng đặc trưng."
+    },
+    {
+        "id": 5,
+        "chapter": "Glucose-Fructose",
+        "topic": "Glucose-Fructose",
+        "question": "So sánh glucose và fructose?",
+        "keywords": [
+            "Sự khác biệt giữa Glucose và Fructose"
+        ],
+        "answer": "Điểm giống nhau: Glucose và fructose đều là monosaccharide (đường đơn), có cùng công thức phân tử và đều là những carbohydrate quan trọng đối với cơ thể. Cả hai đều tan tốt trong nước, có vị ngọt và đều có khả năng tham gia phản ứng tráng bạc, phản ứng với thuốc thử Fehling. Điểm khác nhau: Glucose trong dạng mạch hở có nhóm aldehyde còn fructose trong dạng mạch hở có nhóm ketone."
+    },
+    {
+        "id": 6,
+        "chapter": "Saccharose-Maltose",
+        "topic": "Saccharose-Maltose",
+        "question": "So sánh Saccharose và Maltose",
+        "keywords": [
+            "Sự khác biệt giữa Saccharose và Maltose"
+        ],
+        "answer": "Điểm giống nhau: Saccharose và maltose đều là disaccharide (đường đôi). Cả hai đều tan trong nước, có vị ngọt và có thể bị thủy phân tạo thành các đường đơn tương ứng. Điểm khác nhau: Saccharose được tạo thành từ glucose và fructose, trong khi maltose được tạo thành từ hai phân tử glucose. Về tính khử, saccharose là đường không khử còn maltose là đường khử. Khi thủy phân, saccharose tạo ra glucose và fructose, còn maltose tạo ra hai phân tử glucose."
+    },
+    {
+        "id": 6,
+        "chapter": "Tinh bột-Cellulose",
+        "topic": "Tinh bột-Cellulose",
+        "question": "Các dạng tinh bột ?",
+        "keywords": [
+            "Các dạng tinh bột"
+        ],
+        "answer":"Tinh bột được chia thành ba nhóm dựa trên những đặc tính về dinh dưỡng, bao gồm: Tinh bột hấp thụ nhanh tồn tại trong những thực phẩm nấu chín, điển hình là khoai tây và bánh mì, được cơ thể chuyển hóa nhanh chóng thành glucose để sử dụng. Tinh bột hấp thụ chậm (như hạt ngũ cốc) có cấu trúc tương đối phức tạp hơn. Dạng tinh bột này sẽ được cơ thể phân giải từ từ. Tinh bột đề kháng Đây là nhóm tinh bột không thể tiêu hóa được trong ruột non nên chúng được phân loại như một dạng chất xơ, giữ vai trò hỗ trợ hệ vi khuẩn đường ruột."
+    },
+    {
+        "id": 7,
+        "chapter": "Carbohydrate",
+        "topic": "Carbohydrate",
+        "question": "Ứng dụng của carbohydrate?",
+        "keywords": [
+            "Ứng dụng của carbohydrate"
+        ],
+        "answer":"Carbohydrate có nhiều ứng dụng trong đời sống và sản xuất. Trong thực phẩm, glucose và fructose được dùng làm chất tạo vị ngọt, saccharose được sử dụng làm đường ăn, còn tinh bột được dùng để chế biến bánh, mì và nhiều sản phẩm khác. Tinh bột còn là nguyên liệu sản xuất glucose, ethanol và một số sản phẩm công nghiệp. Cellulose được sử dụng để sản xuất giấy, bông sợi và tơ nhân tạo. Ngoài ra, carbohydrate còn được sử dụng trong công nghiệp lên men và là nguồn cung cấp năng lượng quan trọng cho cơ thể."
+    },
+    {
+       "id": 8,
+        "chapter": "Tinh bột-Cellulose",
+        "topic": "Tinh bột-Cellulose",
+        "question": "Sự khác biệt giữa tinh bột và cellulose ?",
+        "keywords": [
+            "Sự khác biệt giữa tinh bột và cellulose"
+        ],
+        "answer":"Tinh bột và cellulose đều là polysaccharide, được cấu tạo từ nhiều đơn vị glucose liên kết với nhau và đều có nguồn gốc chủ yếu từ thực vật. Tuy nhiên, tinh bột gồm amylose và amylopectin, có cấu trúc mạch thẳng hoặc phân nhánh. Cellulose có cấu trúc mạch thẳng, không phân nhánh. Tinh bột là chất dự trữ năng lượng của thực vật và có thể được cơ thể người tiêu hóa để cung cấp năng lượng. Ngược lại, cellulose là thành phần chính của thành tế bào thực vật, không được cơ thể người tiêu hóa và chủ yếu cung cấp chất xơ cho cơ thể." 
+
+    },
+    {
+        "id": 9,
+        "chapter": "Carbohydrate",
+        "topic": "Carbohydrate",
+        "question": "Thiếu carbohydrate có ảnh hưởng gì đến sức khỏe ?",
+        "keywords": [
+            "Thiếu carbohydrate"
+        ],
+        "answer":"Thiếu carbohydrate trong chế độ ăn có thể ảnh hưởng đến sức khỏe vì carbohydrate là nguồn cung cấp năng lượng quan trọng cho cơ thể. Khi thiếu carbohydrate, cơ thể có thể cảm thấy mệt mỏi, thiếu năng lượng, khó tập trung và giảm khả năng hoạt động thể chất. Nếu tình trạng kéo dài, cơ thể phải sử dụng chất béo và protein để tạo năng lượng, có thể làm thay đổi quá trình chuyển hóa và ảnh hưởng đến sức khỏe. Vì vậy, cần bổ sung carbohydrate với lượng phù hợp từ các nguồn thực phẩm đa dạng như ngũ cốc, khoai, rau củ và trái cây."
+    },
+    {
+        "id": 10,
+        "chapter": "Carbohydrate",
+        "topic": "Carbohydrate",
+        "question": "Tại sao lại phân chia carbohydrate thành monosaccharide, disaccharide và polysaccharide?",
+        "keywords": [
+            "Monosaccharide",
+            "Disaccharide",
+            "Polysaccharide"
+
+        ],
+        "answer":"Carbohydrate được chia thành monosaccharide, disaccharide và polysaccharide dựa chủ yếu vào số lượng đơn vị đường đơn có trong phân tử. Monosaccharide là carbohydrate chỉ gồm một đơn vị đường và không thể thủy phân thành carbohydrate đơn giản hơn, ví dụ glucose và fructose. Disaccharide gồm hai đơn vị đường đơn liên kết với nhau, khi thủy phân tạo thành hai phân tử đường đơn, ví dụ saccharose và maltose. Polysaccharide gồm nhiều đơn vị đường đơn liên kết thành chuỗi dài, có thể mạch thẳng hoặc phân nhánh, ví dụ tinh bột, glycogen và cellulose. Cách phân chia này giúp dễ nhận biết và nghiên cứu cấu tạo, tính chất của carbohydrate."
+    }
+]
+
+
+
