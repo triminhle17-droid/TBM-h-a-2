@@ -954,11 +954,40 @@
       </div>
     </div>
 
-    <!-- NÚT ĐIỀU HƯỚNG NEXT / PREV -->
-    <div class="controls">
-      <button id="btn-prev">‹ Trang trước</button>
-      <span class="page-indicator" id="page-indicator">Trang 1 / 5</span>
-      <button id="btn-next">Trang sau ›</button>
+<!-- NÚT ĐIỀU HƯỚNG CẢI TIẾN (VỪA NHẬP VỪA CHỌN) -->
+    <div class="controls-wrapper">
+      <div class="controls">
+        <!-- Nút về trang đầu -->
+        <button id="btn-first" title="Trang đầu">
+          <span>«</span> <span class="btn-text">Đầu</span>
+        </button>
+        
+        <!-- Nút trang trước -->
+        <button id="btn-prev" title="Trang trước">
+          <span>‹</span> <span class="btn-text">Trước</span>
+        </button>
+        
+        <!-- Khung kết hợp cả Nhập số và Chọn Dropdown -->
+        <div class="page-select-input-container">
+          <div class="page-input-wrapper">
+            <input type="number" id="page-input" min="1" value="1" title="Nhập số trang và nhấn Enter" />
+            <select id="page-select" title="Hoặc chọn trang từ danh sách">
+              <!-- Options sẽ tự động điền bằng JS -->
+            </select>
+          </div>
+          <span class="page-total-label" id="page-total">/ 10</span>
+        </div>
+        
+        <!-- Nút trang sau -->
+        <button id="btn-next" title="Trang sau">
+          <span class="btn-text">Sau</span> <span>›</span>
+        </button>
+        
+        <!-- Nút đến trang cuối -->
+        <button id="btn-last" title="Trang cuối">
+          <span class="btn-text">Cuối</span> <span>»</span>
+        </button>
+      </div>
     </div>
 
     <!-- CẤU HÌNH JAVASCRIPT -->
