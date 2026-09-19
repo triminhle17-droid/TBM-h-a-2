@@ -503,6 +503,124 @@
       font-display: swap;
       /* Giúp hiện chữ ngay khi chờ nạp font */
     }
+    /* Thanh điều khiển chuyển trang cải tiến */
+    .controls-wrapper {
+      position: sticky;
+      bottom: 15px;
+      margin-top: 15px;
+      z-index: 99;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      padding: 8px 18px;
+      border-radius: 40px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: all 0.3s ease;
+    }
+
+    .controls button {
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      background-color: #1e293b;
+      color: #ffffff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      user-select: none;
+    }
+
+    .controls button:hover:not(:disabled) {
+      background-color: #0f766e;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(15, 118, 110, 0.3);
+    }
+
+    .controls button:disabled {
+      background-color: #cbd5e1;
+      color: #94a3b8;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Khung kết hợp cả VỪA NHẬP VỪA CHỌN TRANG */
+    .page-select-input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 2px 6px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .page-select-input-container:focus-within {
+      border-color: #0f766e;
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+    }
+
+    .page-input-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Ô nhập trang */
+    #page-input {
+      width: 42px;
+      height: 30px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      outline: none;
+      color: #0f172a;
+      font-family: inherit;
+    }
+
+    /* Dropdown danh sách chọn nhanh */
+    #page-select {
+      height: 30px;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      padding-right: 4px;
+    }
+
+    .page-total-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748b;
+      margin: 0 6px 0 2px;
+      white-space: nowrap;
+    }
+
+    /* Hide chrome input spinner */
+    #page-input::-webkit-outer-spin-button,
+    #page-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    #page-input[type=number] {
+      -moz-appearance: textfield;
+    }
   </style>
 </head>
 
