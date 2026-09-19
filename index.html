@@ -1132,57 +1132,113 @@
         });
 
 
-        // Load pages
-        pageFlip.loadFromHTML(document.querySelectorAll(".my-page"));
+               // Load các trang sách
+      const pages = document.querySelectorAll(".my-page");
+      pageFlip.loadFromHTML(pages);
 
+      // DOM Elements phần Navigation
+      const btnFirst = document.getElementById("btn-first");
+      const btnPrev = document.getElementById("btn-prev");
+      const btnNext = document.getElementById("btn-next");
+      const btnLast = document.getElementById("btn-last");
+      const pageInput = document.getElementById("page-input");
+      const pageSelect = document.getElementById("page-select");
+      const pageTotal = document.getElementById("page-total");
 
-        const tocLinks = document.querySelectorAll(".toc-link");
-        tocLinks.forEach(function (link) {
-          link.addEventListener("click", function (e) {
-            e.preventDefault();
-            const pageIndex = parseInt(this.dataset.page);
-            pageFlip.flip(pageIndex);
-          });
-        });
+      const totalPages = pages.length;
 
+      // Khởi tạo tùy chọn Dropdown cho danh sách chọn trang
+      function initPageDropdown(total) {
+        pageSelect.innerHTML = "";
+        for (let i = 1; i <= total; i++) {
+          const option = document.createElement("option");
+          option.value = i;
+          option.textContent = `Trang ${i}`;
+          pageSelect.appendChild(option);
+        }
+        pageTotal.textContent = `/ ${total}`;
+        pageInput.max = total;
+      }
 
+      initPageDropdown(totalPages);
 
-        // Buttons
-        const btnPrev = document.getElementById("btn-prev");
-        const btnNext = document.getElementById("btn-next");
-        const pageIndicator = document.getElementById("page-indicator");
-        // Previous
-        btnPrev.addEventListener("click", function () {
+      // Cập nhật trạng thái UI Controls khi chuyển trang
+      function updateNavUI(currentPage) {
+        pageInput.value = currentPage;
+        pageSelect.value = currentPage;
+
+        btnFirst.disabled = currentPage === 1;
+        btnPrev.disabled = currentPage === 1;
+        btnNext.disabled = currentPage === totalPages;
+        btnLast.disabled = currentPage === totalPages;
+      }
+
+      // Lắng nghe sự kiện lật trang từ PageFlip
+      pageFlip.on("flip", function (e) {
+        const currentPage = e.data + 1; // 1-based index
+        updateNavUI(currentPage);
+      });
+
+      // Gán sự kiện Click cho nút bấm
+      btnFirst.addEventListener("click", () => pageFlip.flip(0));
+      btnPrev.addEventListener("click", () => pageFlip.flipPrev());
+      btnNext.addEventListener("click", () => pageFlip.flipNext());
+      btnLast.addEventListener("click", () => pageFlip.flip(totalPages - 1));
+
+      // 1. CHỦ ĐỘNG NHẬP SỐ TRANG (Type Page)
+      pageInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          let pageNum = parseInt(this.value);
+          if (isNaN(pageNum) || pageNum < 1) pageNum = 1;
+          if (pageNum > totalPages) pageNum = totalPages;
+
+          pageFlip.flip(pageNum - 1);
+          this.blur();
+        }
+      });
+
+      // 2. CHỦ ĐỘNG CHỌN TỪ DROPDOWN (Select Page)
+      pageSelect.addEventListener("change", function () {
+        const pageNum = parseInt(this.value);
+        if (!isNaN(pageNum)) {
+          pageFlip.flip(pageNum - 1);
+        }
+      });
+
+      // 3. ĐIỀU HƯỚNG BẰNG BÀN PHÍM (Mũi tên phím Trái/Phải)
+      document.addEventListener("keydown", function (e) {
+        const activeTag = document.activeElement.tagName;
+        // Bỏ qua nếu đang gõ trong khung chat hoặc khung nhập trang
+        if (activeTag === "INPUT" || activeTag === "TEXTAREA" || activeTag === "SELECT") {
+          return;
+        }
+
+        if (e.key === "ArrowLeft") {
           pageFlip.flipPrev();
-        });
-
-
-        // Next
-        btnNext.addEventListener("click", function () {
+        } else if (e.key === "ArrowRight") {
           pageFlip.flipNext();
+        }
+      });
+
+      // Liên kết Mục Lục (TOC Links)
+      const tocLinks = document.querySelectorAll(".toc-link");
+      tocLinks.forEach(function (link) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const pageIndex = parseInt(this.dataset.page);
+          alert(pageIndex);
+          if (!isNaN(pageIndex)) {
+            pageFlip.flip(pageIndex);
+          }
         });
+      });
 
-
-        // Page number
-        pageFlip.on("flip", function (e) {
-          const currentPage = e.data + 1;
-          const totalPages = pageFlip.getPageCount();
-
-
-          pageIndicator.textContent = `Trang ${currentPage} / ${totalPages}`;
-        });
-
-
-        // Responsive
-        let resizeTimer;
-
-
-        window.addEventListener("resize", function () {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(function () {
-            pageFlip.update();
-          }, 250);
-        });
+      // Responsive redraw
+      let resizeTimer;
+      window.addEventListener("resize", function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => pageFlip.update(), 250);
+      });
 
 
         // Mobile orientation
@@ -1192,6 +1248,7 @@
           }, 500);
         });
       });
+
 
     </script>
     <div class="chatbot">
